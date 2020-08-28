@@ -42,6 +42,14 @@ Sub CreateWorkbookTableOfContents()
 		.Range(headingCellReference) = "Table of Contents"
 	End With
 
+	Dim dataTableHeadingRowIndex, nameColumnIndex, numberColumnIndex As Long
+	numberColumnIndex = 2 'Column B
+	nameColumnIndex = 3 'Column C
+	dataTableHeadingRowIndex = 4 'Row 4
+
+	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, numberColumnIndex).Value = "#"
+	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, nameColumnIndex).Value = "Worksheet"
+
 	Dim myArray As Variant
 
 	'Create Array list with sheet names (excluding Contents)
