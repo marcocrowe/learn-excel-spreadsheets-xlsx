@@ -1,6 +1,8 @@
 '
 ' Copyright (c) 2020 Mark Crowe <https://github.com/markcrowe-com>. All rights reserved.
 '
+Option Explicit On
+
 Sub CreateWorkbookTableOfContents()
 	'Optimize Code
 	Application.DisplayAlerts = False
@@ -16,6 +18,7 @@ Sub CreateWorkbookTableOfContents()
 
 	If ActiveSheet.Name = tableOfConentsWorksheetName Then
 		Dim message As String
+		Dim myAnswer
 		message = "A worksheet named [" & tableOfConentsWorksheetName & "] has already been created, would you like to replace it?"
 
 		myAnswer = MsgBox(message, vbYesNo)
@@ -34,7 +37,8 @@ Sub CreateWorkbookTableOfContents()
     Set tableOfConentsWorksheet = ActiveSheet
 
     'Format Worksheet Title
-    headingCellReference = "B2:C2"
+    Dim headingCellReference As String
+	headingCellReference = "B2:C2"
 	With tableOfConentsWorksheet
 		.Name = tableOfConentsWorksheetName
 		.Range(headingCellReference).Merge
@@ -50,13 +54,13 @@ Sub CreateWorkbookTableOfContents()
 	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, numberColumnIndex).Value = "#"
 	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, nameColumnIndex).Value = "Worksheet"
 
-	Dim worksheet As worksheet
+	Dim worksheet As Worksheet
 	Dim worksheetNumber As Long
 	For Each worksheet In ActiveWorkbook.Worksheets
 		If worksheet.Name <> tableOfConentsWorksheetName Then
 			worksheetNumber = worksheetNumber + 1
 			With tableOfConentsWorksheet
-				.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & worksheet.Name & "'!A1", TextToDisplay:=worksheet.Name
+				.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & Worksheet.Name & "'!A1", TextToDisplay:=Worksheet.Name
                 .Cells(worksheetNumber + dataTableHeadingRowIndex, numberColumnIndex).Value = worksheetNumber
 			End With
 		End If
