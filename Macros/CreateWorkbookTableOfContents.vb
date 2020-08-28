@@ -34,10 +34,11 @@ Sub CreateWorkbookTableOfContents()
     Set tableOfConentsWorksheet = ActiveSheet
 
     'Format Contents Sheet
+    headingCellReference = "B1"
 	With tableOfConentsWorksheet
 		.Name = tableOfConentsWorksheetName
-		.Range("B1") = "Table of Contents"
-		.Range("B1").Style = "Heading 1"
+		.Range(headingCellReference) = "Table of Contents"
+		.Range(headingCellReference).Style = "Heading 1"
 	End With
 
 	Dim myArray As Variant
