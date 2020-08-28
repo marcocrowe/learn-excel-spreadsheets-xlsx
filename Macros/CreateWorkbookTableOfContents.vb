@@ -54,25 +54,25 @@ Sub CreateWorkbookTableOfContents()
 
 	'Create Array list with sheet names (excluding Contents)
 	ReDim myArray(1 To Worksheets.Count - 1)
-	Dim x As Long
+	Dim worksheetNumber As Long
 
-	Dim sht As Worksheet
-	For Each sht In ActiveWorkbook.Worksheets
-		If sht.Name <> tableOfConentsWorksheetName Then
-			myArray(x + 1) = sht.Name
-			x = x + 1
+	Dim worksheet As Worksheet
+	For Each worksheet In ActiveWorkbook.Worksheets
+		If worksheet.Name <> tableOfConentsWorksheetName Then
+			myArray(x + 1) = worksheet.Name
+			worksheetNumber = worksheetNumber + 1
 		End If
-	Next sht
+	Next worksheet
 
 	'Create Table of Contents
-	For x = LBound(myArray) To UBound(myArray)
-        Set sht = Worksheets(myArray(x))
-        sht.Activate
+	For worksheetNumber = LBound(myArray) To UBound(myArray)
+        Set worksheet = Worksheets(myArray(worksheetNumber))
+        worksheet.Activate
 		With tableOfConentsWorksheet
-			.Hyperlinks.Add.Cells(x + 2, 3), "", SubAddress:="'" & sht.Name & "'!A1", TextToDisplay:=sht.Name
-            .Cells(x + 2, 2).Value = x
+			.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & worksheet.Name & "'!A1", TextToDisplay:=worksheet.Name
+            .Cells(worksheetNumber + dataTableHeadingRowIndex, numberColumnIndex).Value = worksheetNumber
 		End With
-	Next x
+	Next worksheetNumber
 
 	tableOfConentsWorksheet.Activate
 	tableOfConentsWorksheet.Columns(3).EntireColumn.AutoFit
