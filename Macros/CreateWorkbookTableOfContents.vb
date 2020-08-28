@@ -51,8 +51,14 @@ Sub CreateWorkbookTableOfContents()
 	nameColumnIndex = 3 'Column C
 	dataTableHeadingRowIndex = 4 'Row 4
 
-	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, numberColumnIndex).Value = "#"
-	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, nameColumnIndex).Value = "Worksheet"
+	Dim dataTableName, dataTableStartCell, dataTableEndCell, numberColumnText, nameColumnText As String
+	dataTableName = "ContentsTable"
+	dataTableStartCell = "$B$4"
+	nameColumnText = "Worksheet"
+	numberColumnText = "#"
+
+	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, numberColumnIndex).Value = numberColumnText
+	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, nameColumnIndex).Value = nameColumnText
 
 	Dim worksheet As Worksheet
 	Dim worksheetNumber As Long
@@ -60,15 +66,20 @@ Sub CreateWorkbookTableOfContents()
 		If worksheet.Name <> tableOfConentsWorksheetName Then
 			worksheetNumber = worksheetNumber + 1
 			With tableOfConentsWorksheet
-				.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & Worksheet.Name & "'!A1", TextToDisplay:=Worksheet.Name
+				.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & worksheet.Name & "'!A1", TextToDisplay:=worksheet.Name
                 .Cells(worksheetNumber + dataTableHeadingRowIndex, numberColumnIndex).Value = worksheetNumber
 			End With
 		End If
 	Next worksheet
+	dataTableEndCell = "$C" & (worksheetNumber + dataTableHeadingRowIndex)
 
 
 	tableOfConentsWorksheet.Activate
 	tableOfConentsWorksheet.Columns(3).EntireColumn.AutoFit
+
+	With ActiveSheet.ListObjects.Add(xlSrcRange, Range(dataTableStartCell & ":" & dataTableEndCell), , xlYes)
+		.Name = dataTableName
+	End With
 
 	'Adjust Zoom and Remove Gridlines
 	ActiveWindow.DisplayGridlines = False
