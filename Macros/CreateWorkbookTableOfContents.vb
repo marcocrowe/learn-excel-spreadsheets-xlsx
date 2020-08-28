@@ -45,7 +45,7 @@ Sub CreateWorkbookTableOfContents()
 
 	'Create Array list with sheet names (excluding Contents)
 	ReDim myArray(1 To Worksheets.Count - 1)
-	Dim x As Long, y As Long
+	Dim x As Long
 
 	Dim sht As Worksheet
 	For Each sht In ActiveWorkbook.Worksheets
