@@ -55,19 +55,6 @@ Sub CreateWorkbookTableOfContents()
 		End If
 	Next sht
 
-	'Alphabetize Sheet Names in Array List
-	Dim shtName1 As String, shtName2 As String
-	For x = LBound(myArray) To UBound(myArray)
-		For y = x To UBound(myArray)
-			If UCase(myArray(y)) < UCase(myArray(x)) Then
-				shtName1 = myArray(x)
-				shtName2 = myArray(y)
-				myArray(x) = shtName2
-				myArray(y) = shtName1
-			End If
-		Next y
-	Next x
-
 	'Create Table of Contents
 	For x = LBound(myArray) To UBound(myArray)
         Set sht = Worksheets(myArray(x))
