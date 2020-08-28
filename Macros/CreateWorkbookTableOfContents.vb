@@ -37,7 +37,7 @@ Sub CreateWorkbookTableOfContents()
 	With tableOfConentsWorksheet
 		.Name = tableOfConentsWorksheetName
 		.Range("B1") = "Table of Contents"
-		.Range("B1").Font.Bold = True
+		.Range("B1").Style = "Heading 1"
 	End With
 
 	Dim myArray As Variant
