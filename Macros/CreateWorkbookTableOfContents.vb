@@ -2,9 +2,6 @@
 ' Copyright (c) 2020 Mark Crowe <https://github.com/markcrowe-com>. All rights reserved.
 '
 Sub CreateWorkbookTableOfContents()
-	'PURPOSE: Add a Table of Contents worksheets to easily navigate to any tab
-	'SOURCE: www.TheSpreadsheetGuru.com
-
 	Dim sht As Worksheet
 	Dim Content_sht As Worksheet
 	Dim myArray As Variant
