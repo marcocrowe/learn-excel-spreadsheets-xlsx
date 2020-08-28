@@ -6,34 +6,36 @@ Sub CreateWorkbookTableOfContents()
 	Application.DisplayAlerts = False
 	Application.ScreenUpdating = False
 
-	Dim ContentName As String
-	ContentName = "Contents"
+	Dim tableOfConentsWorksheetName As String
+	tableOfConentsWorksheetName = "Contents"
 
 	'Delete Exisiting Table of Contents WorkSheet
 	On Error Resume Next
-	Worksheets(ContentName).Activate
+	Worksheets(tableOfConentsWorksheetName).Activate
 	On Error GoTo 0
 
-	If ActiveSheet.Name = ContentName Then
-		myAnswer = MsgBox("A worksheet named [" & ContentName & "] has already been created, would you like to replace it?", vbYesNo)
+	If ActiveSheet.Name = tableOfConentsWorksheetName Then
+		Dim message As String
+		message = "A worksheet named [" & tableOfConentsWorksheetName & "] has already been created, would you like to replace it?"
 
-		'Did user select No or Cancel?
-		If myAnswer <> vbYes Then GoTo ExitSub
+		myAnswer = MsgBox(message, vbYesNo)
 
-		'Delete old Contents Tab
-		Worksheets(ContentName).Delete
+		If myAnswer <> vbYes Then
+			GoTo ExitSub
+		Else
+			Worksheets(tableOfConentsWorksheetName).Delete
+		End If
+
 	End If
 
-	'Create New Contents Sheet
+	'Create Table of Contents WorkSheet
 	Worksheets.Add Before:=Worksheets(1)
-
-	'Set variable to Contents Sheet
-	Dim Content_sht As Worksheet
-    Set Content_sht = ActiveSheet
+	Dim tableOfConentsWorksheet As Worksheet
+    Set tableOfConentsWorksheet = ActiveSheet
 
     'Format Contents Sheet
-    With Content_sht
-		.Name = ContentName
+	With tableOfConentsWorksheet
+		.Name = tableOfConentsWorksheetName
 		.Range("B1") = "Table of Contents"
 		.Range("B1").Font.Bold = True
 	End With
@@ -46,7 +48,7 @@ Sub CreateWorkbookTableOfContents()
 
 	Dim sht As Worksheet
 	For Each sht In ActiveWorkbook.Worksheets
-		If sht.Name <> ContentName Then
+		If sht.Name <> tableOfConentsWorksheetName Then
 			myArray(x + 1) = sht.Name
 			x = x + 1
 		End If
@@ -69,14 +71,14 @@ Sub CreateWorkbookTableOfContents()
 	For x = LBound(myArray) To UBound(myArray)
         Set sht = Worksheets(myArray(x))
         sht.Activate
-		With Content_sht
+		With tableOfConentsWorksheet
 			.Hyperlinks.Add.Cells(x + 2, 3), "", SubAddress:="'" & sht.Name & "'!A1", TextToDisplay:=sht.Name
             .Cells(x + 2, 2).Value = x
 		End With
 	Next x
 
-	Content_sht.Activate
-	Content_sht.Columns(3).EntireColumn.AutoFit
+	tableOfConentsWorksheet.Activate
+	tableOfConentsWorksheet.Columns(3).EntireColumn.AutoFit
 
 	'A Splash of Guru Formatting! [Optional]
 	Columns("A:B").ColumnWidth = 3.86
