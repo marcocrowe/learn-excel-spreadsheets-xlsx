@@ -2,7 +2,6 @@
 ' Copyright (c) 2020 Mark Crowe <https://github.com/markcrowe-com>. All rights reserved.
 '
 Sub CreateWorkbookTableOfContents()
-
 	'Optimize Code
 	Application.DisplayAlerts = False
 	Application.ScreenUpdating = False
@@ -10,14 +9,13 @@ Sub CreateWorkbookTableOfContents()
 	Dim ContentName As String
 	ContentName = "Contents"
 
-	'Delete Contents Sheet if it already exists
+	'Delete Exisiting Table of Contents WorkSheet
 	On Error Resume Next
 	Worksheets(ContentName).Activate
 	On Error GoTo 0
 
 	If ActiveSheet.Name = ContentName Then
-		myAnswer = MsgBox("A worksheet named [" & ContentName &
-		  "] has already been created, would you like to replace it?", vbYesNo)
+		myAnswer = MsgBox("A worksheet named [" & ContentName & "] has already been created, would you like to replace it?", vbYesNo)
 
 		'Did user select No or Cancel?
 		If myAnswer <> vbYes Then GoTo ExitSub
@@ -29,12 +27,12 @@ Sub CreateWorkbookTableOfContents()
 	'Create New Contents Sheet
 	Worksheets.Add Before:=Worksheets(1)
 
-'Set variable to Contents Sheet
+	'Set variable to Contents Sheet
 	Dim Content_sht As Worksheet
-  Set Content_sht = ActiveSheet
+    Set Content_sht = ActiveSheet
 
-'Format Contents Sheet
-  With Content_sht
+    'Format Contents Sheet
+    With Content_sht
 		.Name = ContentName
 		.Range("B1") = "Table of Contents"
 		.Range("B1").Font.Bold = True
@@ -54,9 +52,7 @@ Sub CreateWorkbookTableOfContents()
 		End If
 	Next sht
 
-
 	'Alphabetize Sheet Names in Array List
-
 	Dim shtName1 As String, shtName2 As String
 	For x = LBound(myArray) To UBound(myArray)
 		For y = x To UBound(myArray)
@@ -71,13 +67,11 @@ Sub CreateWorkbookTableOfContents()
 
 	'Create Table of Contents
 	For x = LBound(myArray) To UBound(myArray)
-    Set sht = Worksheets(myArray(x))
-    sht.Activate
+        Set sht = Worksheets(myArray(x))
+        sht.Activate
 		With Content_sht
-			.Hyperlinks.Add.Cells(x + 2, 3), "", _
-      SubAddress:="'" & sht.Name & "'!A1", _
-      TextToDisplay:=sht.Name
-      .Cells(x + 2, 2).Value = x
+			.Hyperlinks.Add.Cells(x + 2, 3), "", SubAddress:="'" & sht.Name & "'!A1", TextToDisplay:=sht.Name
+            .Cells(x + 2, 2).Value = x
 		End With
 	Next x
 
@@ -106,5 +100,4 @@ ExitSub:
 	'Optimize Code
 	Application.DisplayAlerts = True
 	Application.ScreenUpdating = True
-
 End Sub
