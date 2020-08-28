@@ -1,26 +1,18 @@
 '
 ' Copyright (c) 2020 Mark Crowe <https://github.com/markcrowe-com>. All rights reserved.
 '
-Imports DocumentFormat.OpenXml.Spreadsheet
-
 Sub CreateWorkbookTableOfContents()
-	Dim sht As Worksheet
-	Dim Content_sht As Worksheet
-	Dim myArray As Variant
-	Dim x As Long, y As Long
-	Dim shtName1 As String, shtName2 As String
-	Dim ContentName As String
-
-	'Inputs
-	ContentName = "Contents"
 
 	'Optimize Code
 	Application.DisplayAlerts = False
 	Application.ScreenUpdating = False
 
+	Dim ContentName As String
+	ContentName = "Contents"
+
 	'Delete Contents Sheet if it already exists
 	On Error Resume Next
-	Worksheets("Contents").Activate
+	Worksheets(ContentName).Activate
 	On Error GoTo 0
 
 	If ActiveSheet.Name = ContentName Then
@@ -38,6 +30,7 @@ Sub CreateWorkbookTableOfContents()
 	Worksheets.Add Before:=Worksheets(1)
 
 'Set variable to Contents Sheet
+	Dim Content_sht As Worksheet
   Set Content_sht = ActiveSheet
 
 'Format Contents Sheet
@@ -47,9 +40,13 @@ Sub CreateWorkbookTableOfContents()
 		.Range("B1").Font.Bold = True
 	End With
 
+	Dim myArray As Variant
+
 	'Create Array list with sheet names (excluding Contents)
 	ReDim myArray(1 To Worksheets.Count - 1)
+	Dim x As Long, y As Long
 
+	Dim sht As Worksheet
 	For Each sht In ActiveWorkbook.Worksheets
 		If sht.Name <> ContentName Then
 			myArray(x + 1) = sht.Name
@@ -57,7 +54,10 @@ Sub CreateWorkbookTableOfContents()
 		End If
 	Next sht
 
+
 	'Alphabetize Sheet Names in Array List
+
+	Dim shtName1 As String, shtName2 As String
 	For x = LBound(myArray) To UBound(myArray)
 		For y = x To UBound(myArray)
 			If UCase(myArray(y)) < UCase(myArray(x)) Then
@@ -80,10 +80,22 @@ Sub CreateWorkbookTableOfContents()
       .Cells(x + 2, 2).Value = x
 		End With
 	Next x
-	.HorizontalAlignment = xlCenter
-	.VerticalAlignment = xlCenter
-	.Font.Color = RGB(255, 255, 255)
-	.Interior.Color = RGB(91, 155, 213)
+
+	Content_sht.Activate
+	Content_sht.Columns(3).EntireColumn.AutoFit
+
+	'A Splash of Guru Formatting! [Optional]
+	Columns("A:B").ColumnWidth = 3.86
+	Range("B1").Font.Size = 18
+	Range("B1:F1").Borders(xlEdgeBottom).Weight = xlThin
+
+	With Range("B3:B" & x + 1)
+		.Borders(xlInsideHorizontal).Color = RGB(255, 255, 255)
+		.Borders(xlInsideHorizontal).Weight = xlMedium
+		.HorizontalAlignment = xlCenter
+		.VerticalAlignment = xlCenter
+		.Font.Color = RGB(255, 255, 255)
+		.Interior.Color = RGB(91, 155, 213)
 	End With
 
 	'Adjust Zoom and Remove Gridlines
