@@ -68,20 +68,6 @@ Sub CreateWorkbookTableOfContents()
 	tableOfConentsWorksheet.Activate
 	tableOfConentsWorksheet.Columns(3).EntireColumn.AutoFit
 
-	'A Splash of Guru Formatting! [Optional]
-	Columns("A:B").ColumnWidth = 3.86
-	Range("B1").Font.Size = 18
-	Range("B1:F1").Borders(xlEdgeBottom).Weight = xlThin
-
-	With Range("B3:B" & x + 1)
-		.Borders(xlInsideHorizontal).Color = RGB(255, 255, 255)
-		.Borders(xlInsideHorizontal).Weight = xlMedium
-		.HorizontalAlignment = xlCenter
-		.VerticalAlignment = xlCenter
-		.Font.Color = RGB(255, 255, 255)
-		.Interior.Color = RGB(91, 155, 213)
-	End With
-
 	'Adjust Zoom and Remove Gridlines
 	ActiveWindow.DisplayGridlines = False
 	ActiveWindow.Zoom = 130
