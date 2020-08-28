@@ -50,29 +50,18 @@ Sub CreateWorkbookTableOfContents()
 	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, numberColumnIndex).Value = "#"
 	tableOfConentsWorksheet.Cells(dataTableHeadingRowIndex, nameColumnIndex).Value = "Worksheet"
 
-	Dim myArray As Variant
-
-	'Create Array list with sheet names (excluding Contents)
-	ReDim myArray(1 To Worksheets.Count - 1)
+	Dim worksheet As worksheet
 	Dim worksheetNumber As Long
-
-	Dim worksheet As Worksheet
 	For Each worksheet In ActiveWorkbook.Worksheets
 		If worksheet.Name <> tableOfConentsWorksheetName Then
-			myArray(x + 1) = worksheet.Name
 			worksheetNumber = worksheetNumber + 1
+			With tableOfConentsWorksheet
+				.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & worksheet.Name & "'!A1", TextToDisplay:=worksheet.Name
+                .Cells(worksheetNumber + dataTableHeadingRowIndex, numberColumnIndex).Value = worksheetNumber
+			End With
 		End If
 	Next worksheet
 
-	'Create Table of Contents
-	For worksheetNumber = LBound(myArray) To UBound(myArray)
-        Set worksheet = Worksheets(myArray(worksheetNumber))
-        worksheet.Activate
-		With tableOfConentsWorksheet
-			.Hyperlinks.Add.Cells(worksheetNumber + dataTableHeadingRowIndex, nameColumnIndex), "", SubAddress:="'" & worksheet.Name & "'!A1", TextToDisplay:=worksheet.Name
-            .Cells(worksheetNumber + dataTableHeadingRowIndex, numberColumnIndex).Value = worksheetNumber
-		End With
-	Next worksheetNumber
 
 	tableOfConentsWorksheet.Activate
 	tableOfConentsWorksheet.Columns(3).EntireColumn.AutoFit
