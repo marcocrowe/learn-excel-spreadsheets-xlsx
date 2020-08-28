@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ExcelToc</RootNamespace>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="desktop.ini" />
+		<None Remove="folder.ico" />
+	</ItemGroup>
+
+</Project>
