@@ -1,6 +1,8 @@
 '
 ' Copyright (c) 2020 Mark Crowe <https://github.com/markcrowe-com>. All rights reserved.
 '
+Imports DocumentFormat.OpenXml.Spreadsheet
+
 Sub CreateWorkbookTableOfContents()
 	Dim sht As Worksheet
 	Dim Content_sht As Worksheet
