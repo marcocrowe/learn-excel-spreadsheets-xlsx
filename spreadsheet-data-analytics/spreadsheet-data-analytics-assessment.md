@@ -5,9 +5,9 @@
 
 Example 1.8 (A Sales-Promotion Decision Model) (and 1.7 Breakeven Decision Model)  from last week’s notes (Page 18) provided data from an experiment to identify the relationship between sales and **pricing**, **coupon**, and **advertising** strategies.  
 
-1. In the **Chapter 2 Assessment – Workbook** on Moodle in the **Question 1 worksheet**, implement the model in the example within your spreadsheet to estimate the sales for each of the weekly experiments in Column H.  
-1. Graph the Sales for the 3 stores and the Model prediction all on 1 graph for comparison.  
-1. Compute the average sales for the three stores and find the differences between the averages and the model estimates for each week (from cells E19 to H19).
+1. In the **Chapter 2 Assessment – Workbook** on Moodle in the **Question 1 worksheet**, implement the model in the example within your spreadsheet to estimate the sales for each of the weekly experiments in Column `H`.  
+2. Graph the Sales for the 3 stores and the Model prediction all on 1 graph for comparison.  
+3. Compute the average sales for the three stores and find the differences between the averages and the model estimates for each week (from cells `E19` to `H19`).
 
 | Week | Price | Coupon | Advertising | Store 1 Unit Sales | Store 2 Unit Sales | Store 3 Unit Sales |
 |-----:|------:|-------:|------------:|-------------------:|-------------------:|-------------------:|
@@ -28,7 +28,7 @@ Example 1.8 (A Sales-Promotion Decision Model) (and 1.7 Breakeven Decision Model
 |   15 | €5.49 |      1 |       €0.00 |                543 |                531 |                530 |
 |   16 | €5.49 |      1 |     €150.00 |                767 |                743 |                779 |
 
-Sales = 500 - 0.05 \* Price + 30 \* Coupon + 0.08 \* Advertising  + 0.25 \* price \* Advertising
+$\text{Sales} = 500 - 0.05 \cdot \text{Price} + 30 \cdot \text{Coupon} + 0.08 \cdot \text{Advertising} + 0.25 \cdot \text{Price} \cdot \text{Advertising}$
 
 ```excel
 =500 - 0.05 * [@Price] + 30 * [@Coupon] + 0.08 * [@Advertising]  + 0.25 * [@Price] * [@Advertising]
@@ -46,16 +46,16 @@ A pharmaceutical manufacturer has projected net profits for a new drug that is b
 | 4    | €125,000,000.00 |
 | 5    | €530,000,000.00 |
 
-1. In the **Question 2 worksheet** to find the net present value (NPV) of these cash flows for a discount rate of 3%. Put your answer in Cell B11. Use the value stored in B9 in your formula.
+1. In the **Question 2 worksheet** to find the net present value (NPV) of these cash flows for a discount rate of `3%`. Put your answer in Cell `B11`. Use the value stored in `B9` in your formula.
 
 ## Question 3
 
-Example 1.4 in Chapter 1 described a scenario for new product sales that can be characterized by a formula called a `Gompertz` curve: $S = ae^{be^{ct}} \implies a \cdot e^{b*e^{ct}}$.
+Example 1.4 in Chapter 1 described a scenario for new product sales that can be characterized by a formula called a `Gompertz` curve: $S = ae^{be^{ct}}$
 
 1. In the **Question 3 worksheet** calculate sales using the above formula and these values:
    - Time = 0 to 160 in increments of 10 (where t = Time).
    - when `a` = 15000, `b` = -8, and `c` = -0.05.
-   - You should have 2 columns, 1 for `Time` (0 to 160) n column A and 1 for Sales (the formula) in column B. There will be 4 values hard coded in for a, b, c & e (you can let e = 2.718282), use **relative & absolute** (for a, b, c & e) addressing.
+   - You should have 2 columns, 1 for `Time` (0 to 160) n column `A` and 1 for Sales (the formula) in column `B`. There will be 4 values hard coded in for a, b, c & e (you can let e = 2.718282), use **relative & absolute** (for a, b, c & e) addressing.
 2. Create a graph of the Curve.
 
 Sample Tables:
