@@ -30,11 +30,7 @@ Example 1.8 (A Sales-Promotion Decision Model) (and 1.7 Breakeven Decision Model
 
 Sales = 500 - 0.05 \* Price + 30 \* Coupon + 0.08 \* Advertising  + 0.25 \* price \* Advertising
 
-```xlsx
-=500 - 0.05 * [@Price] + 30 * [@Coupon] + 0.08 * [@Advertising]  + 0.25 * [@Price] * [@Advertising]
-```
-
-```formula
+```excel
 =500 - 0.05 * [@Price] + 30 * [@Coupon] + 0.08 * [@Advertising]  + 0.25 * [@Price] * [@Advertising]
 ```
 
@@ -54,7 +50,7 @@ A pharmaceutical manufacturer has projected net profits for a new drug that is b
 
 ## Question 3
 
-Example 1.4 in Chapter 1 described a scenario for new product sales that can be characterized by a formula called a `Gompertz` curve: $S = ae^{be^{ct}} \implies a*e^{b*e^{ct}}$.
+Example 1.4 in Chapter 1 described a scenario for new product sales that can be characterized by a formula called a `Gompertz` curve: $S = ae^{be^{ct}} \implies a \cdot e^{b*e^{ct}}$.
 
 1. In the **Question 3 worksheet** calculate sales using the above formula and these values:
    - Time = 0 to 160 in increments of 10 (where t = Time).
@@ -91,18 +87,16 @@ Sample Tables:
 |  150 | 14,933.78 |
 |  160 | 14,959.80 |
 
-```formula
+```excel
 =VariableA  *VariableE ^ (VariableB * VariableE ^ (VariableC * [@Time]))
 ```
-
-```formula
 
 ```mermaid
 xychart-beta
     title "Time vs S"
     x-axis [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
     y-axis "S" 0 --> 15000
-    bar [5.03, 117.16, 790.58, 2516.85, 5080.29, 7778.55, 10071.94, 11780.80, 12955.56, 13724.44, 14212.85, 14517.52, 14705.48, 14820.67, 14890.97, 14933.78, 14959.80]
+    line [5.03, 117.16, 790.58, 2516.85, 5080.29, 7778.55, 10071.94, 11780.80, 12955.56, 13724.44, 14212.85, 14517.52, 14705.48, 14820.67, 14890.97, 14933.78, 14959.80]
     line [5.03, 117.16, 790.58, 2516.85, 5080.29, 7778.55, 10071.94, 11780.80, 12955.56, 13724.44, 14212.85, 14517.52, 14705.48, 14820.67, 14890.97, 14933.78, 14959.80]
 ```
 
@@ -110,19 +104,18 @@ xychart-beta
 
 The **Question 4 worksheet** shows the prices charged and different product sizes.  
 
-1. In cell B15, using `VLOOKUP` & an IF-statement function, compute the price when any product type, size, and order quantity are entered in cells B10, B11 & B12. (See page 13, slide 26 for example). For example if The type (B10) is ‘D’, the Size (B11) is ‘M’ and the Quantity (B12) is 2, the price should be €10.00.
+In cell `B15`, using `VLOOKUP` & an `IF` function, compute the price when any product type, size, and order quantity are entered in cells `B10`, `B11` & `B12`. For example if the `Type` (`B10`) is `D`, the `Size` (`B11`) is `M` and the `Quantity` (`B12`) is `2`, the `Price` should be `€10.00`.
 
 ## Question 5
 
-For the following exercises use the **Question 5 worksheet** data table. Use **MATCH** and/or **INDEX** functions to find the following (show Item Description):
+For the following exercises use the **Question 5 worksheet** data table. Use `MATCH` and/or `INDEX` functions to find the following (show Item Description):
 
-1. The row numbers corresponding to the first and last (match-type) instance of item number **1369** in column C (be sure Data is sorted by Item number). Remember it will return the index of the array and the array/data has 3 rows of other information before it. Enter your answers in cells M3 and N3.
-1. The order cost associated with the first and last instance of item 1369 that you identified in part (a). Put your answers in cells M5 and N5.
-1. The total cost of all orders for item 1369. Use the answers to parts (a) and (b) along with the SUM function to do this. In other words, you should use the appropriate INDEX and MATCH functions within the SUM function to find the answer. (Remember the values will all be one after the other). Put your answer in cells M7.
+1. The row numbers corresponding to the first and last (match-type) instance of `item number` **1369** in column `C` (be sure Data is sorted by `Item number`). Remember it will return the index of the array and the array/data has 3 rows of other information before it. Enter your answers in cells `M3` and `N3`.
+2. The order cost associated with the first and last instance of `item 1369` that you identified in part 1. Put your answers in cells `M5` and `N5`.
+3. The total cost of all orders for `item 1369`. Use the answers to parts 1 and 2 along with the `SUM` function to do this. In other words, you should use the appropriate `INDEX` and `MATCH` functions within the `SUM` function to find the answer. (Remember the values will all be one after the other). Put your answer in cells `M7`.
+   - Validate your results by applying the `SUM` function directly to the data in column `G`.
 
-￿  Validate your results by applying the SUM function directly to the data in column G.
-
-Put your answer in cells M8
+Put your answer in cells `M8`
 
 |                           |       First |       Last |
 |---------------------------|------------:|-----------:|
@@ -133,7 +126,7 @@ Put your answer in cells M8
 
 ## Question 6
 
-Use **INDEX** and **MATCH** functions to fill in a table that extracts the amounts shipped between each pair of cities in the **Question 6 worksheet.** Your table should display as below, and the formula for the amount (Cells J4 to J11) should reference the names in the From and To columns (This will require absolute and relative values):
+Use `INDEX` and `MATCH` functions to fill in a table that extracts the amounts shipped between each pair of cities in the **Question 6 worksheet.** Your table should display as below, and the formula for the amount (Cells `J4` to `J11`) should reference the names in the From and To columns (This will require absolute and relative values):
 
 | From        | To        | Amount |
 |-------------|-----------|-------:|
